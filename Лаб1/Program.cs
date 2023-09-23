@@ -22,7 +22,7 @@ namespace SupportAndTestingOfSoftwareModulesLAB1
                     float[] xyA = new float[] { -2, -2 };
                     float[] xyB = new float[] { -2, -2 };
                     float[] xyC = new float[] { -2, -2 };
-                    string msg = $" ({xyA[0]}; {xyA[1]}), ({xyB[0]}; {xyB[1]}), ({xyC[0]}; {xyC[1]})";
+                    string msg = $" \n\nA: ({xyA[0]}; {xyA[1]})\nB: ({xyB[0]}; {xyB[1]})\nC: ({xyC[0]}; {xyC[1]})\n";
                     Log.Information(msg);
                     return ("", xyA, xyB, xyC);
                 }
@@ -62,7 +62,7 @@ namespace SupportAndTestingOfSoftwareModulesLAB1
                         xyC[1] *= scale;
                     }
 
-                    string msg = $"{type} ({xyA[0]}; {xyA[1]}), ({xyB[0]}; {xyB[1]}), ({xyC[0]}; {xyC[1]})";
+                    string msg = $"{type}\n\nA: ({xyA[0]}; {xyA[1]})\nB: ({xyB[0]}; {xyB[1]})\nC: ({xyC[0]}; {xyC[1]})\n";
                     Log.Information(msg);
                     return (type, xyA, xyB, xyC); // возвращаем значения, логируем
                 }
@@ -71,7 +71,7 @@ namespace SupportAndTestingOfSoftwareModulesLAB1
                     float[] xy1 = new float[] { -1, -1 };
                     float[] xy2 = new float[] { -1, -1 };
                     float[] xy3 = new float[] { -1, -1 };
-                    string msg = $" Не треугольник ({xy1[0]}; {xy1[1]}), ({xy2[0]}; {xy2[1]}), ({xy3[0]}; {xy3[1]})";
+                    string msg = $" Не треугольник\\nA: ({xy1[0]}; {xy1[1]})\nB: ({xy2[0]}; {xy2[1]})\nC: ({xy3[0]}; {xy3[1]})\n";
                     Log.Information(msg);
                     return ("Не треугольник", xy1, xy2, xy3);
                 }
@@ -81,7 +81,7 @@ namespace SupportAndTestingOfSoftwareModulesLAB1
                 float[] xy1 = new float[] { -2, -2 };
                 float[] xy2 = new float[] { -2, -2 };
                 float[] xy3 = new float[] { -2, -2 };
-                string msg = $" ({xy1[0]}; {xy1[1]}), ({xy2[0]}; {xy2[1]}), ({xy3[0]}; {xy3[1]})";
+                string msg = $" \n\nA: ({xy1[0]}; {xy1[1]})\nB: ({xy2[0]}; {xy2[1]})\nC: ({xy3[0]}; {xy3[1]})\n";
                 Log.Error(ex, msg);
                 return ("", xy1, xy2, xy3);
             }
@@ -90,17 +90,23 @@ namespace SupportAndTestingOfSoftwareModulesLAB1
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите стороны треугольника");
+
             while (true)
             {
+                Console.WriteLine();
+                Console.WriteLine("Введите стороны треугольника ↓\n");
                 Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .WriteTo.File("C:\\Users\\New\\source\\repos\\Лаб1\\Лаб1\\TestLab.txt")
                 .CreateLogger(); // создание логгера
 
+                Console.Write("Сторона A: \t");
                 string A = Console.ReadLine(); // ввод данных
+                Console.Write("Сторона B: \t");
                 string B = Console.ReadLine(); // ввод данных
+                Console.Write("Сторона C: \t");
                 string C = Console.ReadLine(); // ввод данных
+                Console.WriteLine();
 
                 string type;
 
@@ -113,6 +119,8 @@ namespace SupportAndTestingOfSoftwareModulesLAB1
                 (type, Coordinates_A, Coordinates_B, Coordinates_C) = GoTriangle(A, B, C); 
                                                                  
             Log.CloseAndFlush(); // закрывается логгер
+
+                Console.WriteLine("End");
             }
         }
     }
